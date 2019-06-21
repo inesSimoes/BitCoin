@@ -10,6 +10,6 @@
     <div class="row">
         <lightning:input aura:id="dollar" type="number" onchange="{!c.handleClick2}" name="Dollar" label="US Dollar"  value="{!v.USDollar}" format="$ ##,##,###,###.0000" step="0.0001"/>
     </div>
-  <!--<ui:outputCurrency aura:id="dollar" value="{!v.USDollar}" format="$##,##,###,###.00"/>-->
+  
      </lightning:card>
 </aura:component>

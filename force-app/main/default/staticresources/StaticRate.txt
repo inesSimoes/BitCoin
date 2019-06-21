@@ -1,0 +1,1 @@
+[{"code":"BTC","name":"Bitcoin","rate":1},{"code":"BCH","name":"Bitcoin Cash","rate":20.308912},{"code":"USD","name":"US Dollar","rate":7946.06498}]

@@ -1,0 +1,15 @@
+<aura:component controller='Ctrl_Convertor' implements="flexipage:availableForAllPageTypes,force:appHostable" access="global" >
+	<aura:attribute name="USDollar" type="Decimal" default="0.00" />
+    <aura:attribute name="bitcoin" type="Decimal" default="0.00" />
+	<lightning:card  title="Bitcoin to US Dollar Convertor">
+    <div class="row">
+        <lightning:input aura:id="bitcoin" type="number" onchange="{!c.handleClick1}" name="Bitcoin" label="Bitcoin"  value="{!v.bitcoin}" format="&#8383; ##,##,###,###.0000" step="0.0001"/>
+    </div>   
+    <br/>
+    <br/>
+    <div class="row">
+        <lightning:input aura:id="dollar" type="number" onchange="{!c.handleClick2}" name="Dollar" label="US Dollar"  value="{!v.USDollar}" format="$ ##,##,###,###.0000" step="0.0001"/>
+    </div>
+  <!--<ui:outputCurrency aura:id="dollar" value="{!v.USDollar}" format="$##,##,###,###.00"/>-->
+     </lightning:card>
+</aura:component>

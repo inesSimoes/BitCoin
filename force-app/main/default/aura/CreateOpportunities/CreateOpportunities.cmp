@@ -1,0 +1,110 @@
+<aura:component controller="Ctrl_Accounts" implements="flexipage:availableForAllPageTypes,force:appHostable" access="global" >
+    <!--Declare Event Handlers--> 
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+     
+    <!--Declare Attributes-->
+    <aura:attribute name="today" type="Date" default=""/>
+    <aura:attribute name="stage" type="string" default=""/>
+    <aura:attribute name="amount" type="decimal" default="0.0"/>
+    <aura:attribute name="AccountList" type="Account[]" />   
+    <aura:attribute name="isSelectAll" type="boolean" default="false"/>
+    <aura:attribute name="page" type="integer" description="using for store page Number"/>
+    <aura:attribute name="pages" type="integer" description="using for store All Pages page Number"/>
+    <aura:attribute name="total" type="integer" description="total records count store "/>
+    
+   <p class="slds-page-header__title slds-truncate">Create Opportunities</p>
+    
+   
+   <div class="slds-grid slds-gutters">
+  <div class="slds-col slds-size_2-of-6">
+    <span>
+      <lightning:input aura:id="Amount"
+                     type="currency" 
+                     name="Amount" 
+                     label="Amount" 
+                     value="{!v.amount}"
+                     required="true"
+             />
+      </span>
+  </div>
+  <div class="slds-col slds-size_2-of-6">
+    <span>
+      <lightning:select aura:id="select" name="select" label="Select a Stage" required="true">
+        <option value="Prospecting">Prospecting</option>
+        <option value="Qualification">Qualification</option>
+        <option value="Needs Analysis">Needs Analysis</option>
+        <option value="Value Proposition">Value Proposition</option>
+        <option value="Id. Decision Makers">Id. Decision Makers</option>
+        <option value="Perception Analysis">Perception Analysis</option>
+        <option value="Id. Decision Makers">Id. Decision Makers</option>
+        <option value="Proposal/Price Quote">Proposal/Price Quote</option>
+        <option value="Negotiation/Review">Negotiation/Review</option>
+        <option value="Closed Won">Closed Won</option>
+        <option value="Closed Lost">Closed Won</option>
+    </lightning:select>
+      </span>
+  </div>
+</div> 
+  <div class="slds-col slds-size_2-of-6">
+    <span>
+        <lightning:input aura:id="CloseDate"
+                     type="date" 
+                     name="CloseDate" 
+                     label="CloseDate" 
+                     value="{!v.today}"
+                     required = "true"
+             />
+   </span>
+  </div>
+    <br/>
+   <p class="slds-page-header__title slds-truncate">Select Accounts</p>
+    
+  <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3">  
+        <!--Account List Table-->
+        <table class="slds-table slds-table--bordered slds-table--cell-buffer" role="grid" >      
+       
+            <thead>  
+                <tr class="slds-text-title--caps">
+                    <th>           
+                        <label class="slds-checkbox">
+                            <ui:inputCheckbox value="{!v.isSelectAll}" change="{!c.handleSelectAllAccounts}" aura:id="selectAll"/>
+                            <span class="slds-checkbox--faux" />
+                            <span class="slds-form-element__label"></span>
+                        </label>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Name">Name</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>        
+                <aura:iteration items="{!v.AccountList}" var="acc">
+                    <tr>
+                        <th>
+                            <label class="slds-checkbox">
+                                <ui:inputCheckbox aura:id="checkAccount" value="" text="{!acc.Name}"/>
+                                <span class="slds-checkbox--faux" />
+                                <span class="slds-form-element__label"></span>
+                            </label>
+                        </th>
+                        <th>
+                            <div class="slds-truncate" title="{!acc.Name}">{!acc.Name}</div>
+                        </th>
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+       
+        <div class="slds-page-header" role="banner">
+            <div class="slds-align_absolute-center">            
+                <lightning:button disabled="{!v.page == 1}" variant="brand" label="Previous Page" onclick="{! c.navigate }" />            
+                <lightning:button disabled="{!v.page == v.pages}" aura:id="previousPage" variant="brand" label="Next Page" onclick="{! c.navigate }" />
+            </div>
+            <br/>
+            <p class="slds-page-header__title slds-truncate">{!v.total} Accounts • page {!v.page} / {!v.pages}</p>
+        </div>
+ </div>
+            <br/>
+            <lightning:button label="Submit Current Page" class="slds-button_brand" onclick="{!c.handleSelectedAccounts }"  />
+
+</aura:component>
